@@ -11,3 +11,12 @@
  pip2 install -r requirements.txt
  ```
  
+ ** Run tests **
+Make sure to active the virtual environment
+
+```
+python3 -m pytest backend/tests
+```
+
+
+
