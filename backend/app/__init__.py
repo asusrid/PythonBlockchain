@@ -6,5 +6,6 @@ app = Flask(__name__)
 def default():
 	return 'Welcome to the blockchain'
 
-#app.run()
+# by default on port 5000
+# app.run()
 app.run(port=5001)
