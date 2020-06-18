@@ -1,5 +1,6 @@
 
 import time
+import pytest
 from backend.blockchain.block import Block, GENESIS_DATA
 from backend.config import MINE_RATE, SECONDS
 from backend.util.hex_to_binary import hex_to_binary 
@@ -51,4 +52,44 @@ def test_mine_block_limit_to_1():
 	mined_block = Block.mine_block(last_block, 'new')
 
 	assert mined_block.difficulty == 1
+
+@pytest.fixture
+def last_block():
+	return Block.genesis()
+
+@pytest.fixture
+def block(last_block):
+	return Block.mine_block(last_block, 'test_data')
+
+def test_is_valid_block(last_block, block):
+	Block.is_valid_block(last_block, block)
+
+def test_not_valid_block_last_hash(last_block, block):
+	block.last_hash = 'bad_hash'
+
+	with pytest.raises(Exception, match="The reference to the last_hash is incorrect!"):
+		Block.is_valid_block(last_block, block)
+
+def test_not_valid_proof_of_work(last_block, block):
+	block.hash = 'fff'
+
+	with pytest.raises(Exception, match="The PoW is not met!"):
+		Block.is_valid_block(last_block, block)
+
+def test_not_valid_difficulty(last_block, block):
+	not_valid_difficulty = 10
+	block.difficulty = not_valid_difficulty
+	block.hash = f'{"0"*not_valid_difficulty}12abc'
+
+	with pytest.raises(Exception, match="The difficulty must only be increased by 1!"):
+		Block.is_valid_block(last_block, block)
+
+def test_not_valid_hash_block(last_block, block):
+	block.hash = '00000000000abcd'
+
+	with pytest.raises(Exception, match='The block hash is nor created based on the block fields!'):
+		Block.is_valid_block(last_block, block)
+
+
+
 
