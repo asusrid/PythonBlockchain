@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from backend.blockchain.blockchain import Blockchain
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ def route_default():
 
 @app.route('/blockchain')
 def route_blockchain():
-	return blockchain.chain.__repr__()
+	return jsonify(blockchain.to_json())
 
 # by default on port 5000
 # app.run()
