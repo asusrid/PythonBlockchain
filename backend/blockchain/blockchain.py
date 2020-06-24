@@ -47,7 +47,7 @@ class Blockchain:
 		Results will contain a chain list of block instances.
 		"""
 		blockchain = Blockchain()
-		blockchain.chain = list(map(lamba block_json: Block.from_json(block_json), chain_json))
+		blockchain.chain = list(map(lambda block_json: Block.from_json(block_json), chain_json))
 
 		return blockchain
 

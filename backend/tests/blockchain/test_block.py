@@ -87,7 +87,7 @@ def test_not_valid_difficulty(last_block, block):
 def test_not_valid_hash_block(last_block, block):
 	block.hash = '00000000000abcd'
 
-	with pytest.raises(Exception, match='The block hash is nor created based on the block fields!'):
+	with pytest.raises(Exception, match='The block hash is not created based on the block fields!'):
 		Block.is_valid_block(last_block, block)
 
 
