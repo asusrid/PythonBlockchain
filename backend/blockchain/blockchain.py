@@ -21,7 +21,7 @@ class Blockchain:
 		"""
 		Replace the local chain with the incoming one if the following applies:
 			- the incoming chain must be longer than the local one
-			- the incoming chain if formatted properly
+			- the incoming chain is formatted properly
 		"""
 		if len(chain) <= len(self.chain):
 			raise Exception('Cannot replace. The incoming chain must be longer')

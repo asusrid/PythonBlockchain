@@ -132,7 +132,7 @@ class Block:
 		)
 
 		if block.hash != regenerated_hash:
-			raise Exception("The block hash is nor created based on the block fields!")
+			raise Exception("The block hash is not created based on the block fields!")
 
 
 
