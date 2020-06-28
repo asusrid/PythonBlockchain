@@ -78,7 +78,7 @@ def test_valid_tx_with_invalid_outputs():
 		Transaction.is_valid_transaction(transaction)
 
 def test_valid_tx_with_invalid_signature():
-
+	sender_wallet = Wallet()
 	transaction = Transaction(sender_wallet, 'recipient', 50)
 	transaction.input['signature'] = Wallet().sign(transaction.output)
 

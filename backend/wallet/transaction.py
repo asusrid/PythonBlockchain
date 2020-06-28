@@ -60,6 +60,14 @@ class Transaction:
 
 		self.input = self.create_input(sender_wallet, self.output)
 
+	
+	def to_json(self):
+		"""
+		Serialize the transaction.
+		"""
+		return self.__dict__
+
+
 	@staticmethod
 	def is_valid_transaction(transaction):
 		"""
@@ -77,6 +85,9 @@ class Transaction:
 			transaction.input['signature']
 		):
 			raise Exception("Invalid signature")
+
+
+
 
 
 def main():
